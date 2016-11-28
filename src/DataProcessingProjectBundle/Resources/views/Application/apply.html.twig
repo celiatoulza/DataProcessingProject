@@ -4,11 +4,14 @@
   Apply - {{ parent() }}
 {% endblock %}
 
+{% block platform_title %}
+	<h1> Application </h1>
+{% endblock %}
+
 {% block platform_body %}
 
 	
-	<h3>Form</h3>
-	<p>You are applying for the advert "{{ advert.title }}"</p>
+	<h3>Application form for the advert {{ advert.title }} </h3>
 	<div class="well">
 	  {{ form_start( form, { 'attr': { 'class': 'form-horizontal' } } ) }}
 
@@ -28,14 +31,6 @@
 	      {{ form_errors( form.lastName ) }}
 	      <div class="col-sm-4">
 	        {{ form_widget( form.lastName, { 'attr': { 'class': 'form-control' }}) }}
-	      </div>
-	    </div>
-
-	    <div class="form-group">
-	      {{ form_label( form.applicationDate, "Application Date", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
-	      {{ form_errors( form.applicationDate ) }}
-	      <div class="col-sm-4">
-	        {{ form_widget( form.applicationDate, { 'attr': { 'class': '' }}) }}
 	      </div>
 	    </div>
 
@@ -63,6 +58,9 @@
 	      </div>
 	    </div>
 
+	    {% if errorChoice is defined %}
+	    	{{ errorChoice }}
+	    {% endif %}
 	    <div class="form-group">
 	      {{ form_label( form.choiceNumber, "Choice N°", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
 	      {{ form_errors( form.choiceNumber ) }}
@@ -71,23 +69,24 @@
 	      </div>
 	    </div>
 	  
-
-	  	{% if form.save is defined %}
-    		{{ form_widget( form.save, {'attr': {'class': 'btn btn-primary'}}) }}
-  		{% endif %}
+	    <p>
+		    {% if form.save is defined %}
+		      {{ form_widget( form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+		    {% endif %}
+		    <a href="{{ path( 'data_processing_project_view', { 'id' : advert.id } ) }}" class="btn btn-default">
+		      <i class="glyphicon glyphicon-chevron-left"></i>
+		      Back
+	   		</a>
+   		</p>
 
 	  {{ form_rest(form) }}
 	  
 	  {{ form_end(form) }}
 
-
 	</div>
 
 
-	<a href="{{ path( 'data_processing_project_view', { 'id' : advert.id } ) }}" class="btn btn-default">
-      <i class="glyphicon glyphicon-chevron-left"></i>
-      Back
-    </a>
+
 
 
 

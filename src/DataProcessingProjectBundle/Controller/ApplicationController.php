@@ -33,13 +33,38 @@ class ApplicationController extends Controller {
 		}
 
 		// on crée un objet Application
-		$application = new Application;
+		$application = new Application( $this->getUser() );
 
 		// on crée un formulaire à partir de la variable $application créée
 		$form = $this->createForm( ApplicationType::class, $application );
 
 		// on match les valeurs entrées par l'utilisateur dans le formulaire avec notre objet Form de Symfony
 		$form->handleRequest( $request );
+
+
+		// !!! --- JE FAIS LA VERIF CONCERNANT LES CHOIX --- !!! //
+
+		 // on vérifie que le choix entré dans le formulaire courant n'a pas déjà été utilisé par cet utilisateur
+		 if( isset( $application->getChoiceNumber() ) ){
+
+		 	// on récupère toutes les autres applications de l'utilisateur en cours
+		 	$choisesApplicationsUser = $this->getDoctrine()
+		 		->getManager()
+		 		->getRepository( 'DataProcessingProjectBundle:Application' )
+		 		->findAllChoicesAlreadyChooseByThisUser( $this->getUser() );
+		 	
+		 	// si le current choice fait déjà partie des choix utilisé de l'utilisateur, on le fait retourner au formulaire de candidature pour qu'ils choisissent un autre choix
+		 	if ( in_array( $currentChoice, $choisesApplicationsUser[0] ) ){
+		 		echo "deja utilisé ce choix";
+
+		 		return $this->render( 'DataProcessingProjectBundle:Application:apply.html.twig', array(
+					'form' => $form->createView(), 
+					'advert' => $advert, 
+					'errorChoice' => "You have already choose this choice number for your applicaions." ));
+		 	}
+
+		 } 
+
 
 		// si notre formulaire a été soumis, c'est à dire qu'on l'a passé en POST et qu'il est valide
 		if( $form->isSubmitted() && $form->isValid() ){

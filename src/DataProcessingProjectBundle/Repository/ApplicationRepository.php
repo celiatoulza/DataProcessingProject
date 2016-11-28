@@ -27,4 +27,13 @@ class ApplicationRepository extends \Doctrine\ORM\EntityRepository
 			->getResult()
 			;
 	}
+
+	public function findAllChoicesAlreadyChooseByThisUser( $user ){
+
+		$query = $this->_em->createQuery( "SELECT application.choiceNumber FROM DataProcessingProjectBundle:Application application WHERE application.username = :user" );
+		$query->setParameter( 'user', $user );
+		$results = $query->getResult();
+
+		return $results;
+	}
 }

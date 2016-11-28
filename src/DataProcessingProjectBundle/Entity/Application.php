@@ -3,6 +3,7 @@
 namespace DataProcessingProjectBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Application
@@ -65,6 +66,7 @@ class Application
      * @var \Integer
      *
      * @ORM\Column(name="choiceNumber", type="integer", nullable=true)
+     * @Assert\Range(min=1, max=3)
      */
     private $choiceNumber;
 
@@ -82,13 +84,19 @@ class Application
      */
     private $departureDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="username_id", referencedColumnName="id", nullable=false, onDelete="cascade")
+     */
+    private $username;
 
     /////////////////
     // CONSTRUCTOR //
     /////////////////
 
-    public function __construct(){
-        $this->date = new \Datetime();
+    public function __construct( $username ){
+        $this->applicationDate = new \Datetime();
+        $this->username = $username;;
     }
 
 
@@ -97,9 +105,7 @@ class Application
     /////////////////////
 
 
-    public function getAdvertId(){
-        return $this->getAdvert()->getId();
-    }
+
     /**
      * Get id
      *
@@ -288,10 +294,43 @@ class Application
     }
 
 
+    /**
+     * Set username
+     *
+     * @param \UserBundle\Entity\User $username
+     *
+     * @return Application
+     */
+    public function setUsername(\UserBundle\Entity\User $username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Get username
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
     /////////////
     // METHODS //
     /////////////
 
+
+
+    public function getAdvertId(){
+        return $this->getAdvert()->getId();
+    }
+
+    public function getUserId(){
+        return $this->getUsername()->getId();
+    }
     /**
      * @ORM\PrePersist
      */
@@ -307,4 +346,6 @@ class Application
 
         $this->getAdvert()->decreaseNbApplications();
     }
+
+
 }

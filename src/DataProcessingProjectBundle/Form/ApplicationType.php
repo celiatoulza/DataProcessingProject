@@ -25,12 +25,12 @@ class ApplicationType extends AbstractType
         $builder
             ->add( 'firstName', TextType::class )
             ->add( 'lastName', TextType::class )
-            ->add( 'applicationDate', DateTimeType::class, array( 'format' => 'yyyy-MM-dd') )
+            //->add( 'applicationDate', DateTimeType::class, array( 'format' => 'yyyy-MM-dd') )
             ->add( 'departureDate', DateType::class )
             ->add( 'arrivalDate', DateType::class )
             ->add( 'nbPeople', IntegerType::class )
             ->add( 'choiceNumber', IntegerType::class )
-            ->add( 'Save', SubmitType::class )
+            ->add( 'save', SubmitType::class )
             ;
     }
     
