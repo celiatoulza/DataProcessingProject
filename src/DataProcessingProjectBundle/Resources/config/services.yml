@@ -1,0 +1,4 @@
+services:
+    data_processing_project.antispam:
+        class: DataProcessingProjectBundle\Antispam\Antispam
+        arguments: ['@mailer', '%locale%', 50]

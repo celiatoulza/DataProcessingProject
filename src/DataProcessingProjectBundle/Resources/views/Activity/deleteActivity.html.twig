@@ -1,0 +1,26 @@
+{% extends "DataProcessingProjectBundle::layoutActivity.html.twig" %}
+
+{% block title %}
+  Delete Activity - {{ parent() }}
+{% endblock %}
+
+{% block platform_body %}
+
+	<h2> Delete an activity </h2>
+
+	<p> Are you sure you want to delete the activity {{ advertActivity.activity.name }} from {{ advertActivity.advert.title }} ? </p>
+	
+	<form action="{{ path('data_processing_project_delete_activity', { 'id' : advertActivity.activity.id, 'advertId' : advertActivity.advert.id }) }}" method='post'>
+		<p>
+			<a href="{{ path( 'data_processing_project_index_activities', { 'advertId' : advertActivity.advert.id } ) }}" class="btn btn-default">
+		      <i class="glyphicon glyphicon-chevron-left"></i>
+		      Back
+		    </a>
+		    <input type='Submit' value='Delete'>
+		</p>
+
+{{ form_rest(form) }}
+	</form>
+
+
+{% endblock %}

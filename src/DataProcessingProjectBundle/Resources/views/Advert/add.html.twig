@@ -1,0 +1,20 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+  Add - {{ parent() }}
+{% endblock %}
+
+{% block platform_body %}
+
+  <h2>Add an advert</h2>
+
+  {{ include("DataProcessingProjectBundle:Advert:form.html.twig") }}
+
+  <p>
+    <a href="{{ path('data_processing_project_home', {'page': 1}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Retour au menu
+    </a>
+  </p>
+
+{% endblock %}

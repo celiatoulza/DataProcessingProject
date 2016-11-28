@@ -1,0 +1,26 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+  Delete Application - {{ parent() }}
+{% endblock %}
+
+{% block platform_body %}
+
+	<h2> Delete an application </h2>
+
+	<p> Are you sure you want to delete the application from {{ application.firstName }} {{ application.lastName }} for this Advert ? </p>
+	
+	<form action="{{ path('data_processing_project_delete_application', { 'id' : application.id }) }}" method='post'>
+		<p>
+			<a href="{{ path( 'data_processing_project_all_applications', { 'id' : application.advert.id } ) }}" class="btn btn-default">
+		      <i class="glyphicon glyphicon-chevron-left"></i>
+		      Back
+		    </a>
+		    <input type='Submit' value='Delete'>
+		</p>
+
+{{ form_rest(form) }}
+	</form>
+
+
+{% endblock %}

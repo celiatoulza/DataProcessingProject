@@ -1,0 +1,22 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+  Display of an Application - {{ parent() }}
+{% endblock %}
+
+{% block platform_body %}
+	
+	<label> First Name </label> {{ application.firstName }}
+	<br/>
+	<label>Last Name </label> {{ application.lastName }}
+	<br/>
+	<label>Date </label> {{ application.applicationDate|date('d-m-Y') }}
+  <label>Date2 </label> {{ application.applicationDate|date('H:i:s') }}
+
+  <p>
+    <a href="{{ path( 'data_processing_project_all_applications', { 'id' : application.advert.id } ) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Back
+    </a>
+   </p>
+{% endblock %}

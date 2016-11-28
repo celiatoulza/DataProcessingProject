@@ -1,0 +1,95 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+  Apply - {{ parent() }}
+{% endblock %}
+
+{% block platform_body %}
+
+	
+	<h3>Form</h3>
+	<p>You are applying for the advert "{{ advert.title }}"</p>
+	<div class="well">
+	  {{ form_start( form, { 'attr': { 'class': 'form-horizontal' } } ) }}
+
+	    {# Les erreurs générales du formulaire. #}
+	    {{ form_errors( form ) }}
+
+	    <div class="form-group">
+	      {{ form_label( form.firstName, "First Name", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+	      {{ form_errors(form.firstName) }}
+	      <div class="col-sm-4">
+	        {{ form_widget( form.firstName, {'attr': {'class': 'form-control'}}) }}
+	      </div>
+	    </div>
+
+	    <div class="form-group">
+	      {{ form_label( form.lastName, "Last Name", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+	      {{ form_errors( form.lastName ) }}
+	      <div class="col-sm-4">
+	        {{ form_widget( form.lastName, { 'attr': { 'class': 'form-control' }}) }}
+	      </div>
+	    </div>
+
+	    <div class="form-group">
+	      {{ form_label( form.applicationDate, "Application Date", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+	      {{ form_errors( form.applicationDate ) }}
+	      <div class="col-sm-4">
+	        {{ form_widget( form.applicationDate, { 'attr': { 'class': '' }}) }}
+	      </div>
+	    </div>
+
+	    <div class="form-group">
+	      {{ form_label( form.nbPeople, "Number of People", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+	      {{ form_errors( form.nbPeople ) }}
+	      <div class="col-sm-4">
+	        {{ form_widget( form.nbPeople, { 'attr': { 'class': '' }}) }}
+	      </div>
+	    </div>
+
+	    <div class="form-group">
+	      {{ form_label( form.arrivalDate, "Arrival Date", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+	      {{ form_errors( form.arrivalDate ) }}
+	      <div class="col-sm-4">
+	        {{ form_widget( form.arrivalDate, { 'attr': { 'class': '' }}) }}
+	      </div>
+	    </div>
+
+	    <div class="form-group">
+	      {{ form_label( form.departureDate, "Departure Date", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+	      {{ form_errors( form.departureDate ) }}
+	      <div class="col-sm-4">
+	        {{ form_widget( form.departureDate, { 'attr': { 'class': '' }}) }}
+	      </div>
+	    </div>
+
+	    <div class="form-group">
+	      {{ form_label( form.choiceNumber, "Choice N°", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+	      {{ form_errors( form.choiceNumber ) }}
+	      <div class="col-sm-4">
+	        {{ form_widget( form.choiceNumber, { 'attr': { 'class': '' }}) }}
+	      </div>
+	    </div>
+	  
+
+	  	{% if form.save is defined %}
+    		{{ form_widget( form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+  		{% endif %}
+
+	  {{ form_rest(form) }}
+	  
+	  {{ form_end(form) }}
+
+
+	</div>
+
+
+	<a href="{{ path( 'data_processing_project_view', { 'id' : advert.id } ) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Back
+    </a>
+
+
+
+
+{% endblock %}

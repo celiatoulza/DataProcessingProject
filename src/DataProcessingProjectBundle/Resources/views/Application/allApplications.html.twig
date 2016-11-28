@@ -1,0 +1,33 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+  Display all Applications - {{ parent() }}
+{% endblock %}
+
+{% block platform_body %}
+
+<h3> This is the list of aplications for the advert {{ advert.title }} </h3>
+	
+	<table style="text-align:center">
+        <tr>
+          <th width="200px" style="text-align:center ">First Name</th>
+          <th width="200px" style="text-align:center ">Last Name</th>
+          <th width="200px" style="text-align:center ">Date</th>
+        </tr>
+	{% for app in listApplications %}
+		<tr>
+			<td> {{ app.firstName }} </td>
+			<td> {{ app.lastName }} </td>
+			<td> {{ app.applicationdate|date("d/m/Y") }} </td>
+			<td><a href="{{ path( 'data_processing_project_view_application', { 'id' : app.id } ) }}" class="btn btn-default"> See </a></td>
+			<td><a href="{{ path( 'data_processing_project_delete_application', { 'id' : app.id } ) }}" class="btn btn-default"> Delete </a></td>
+		</tr>
+	{% endfor %}
+	</table>
+
+	<a href="{{ path( 'data_processing_project_view', { 'id' : advert.id } ) }}" class="btn btn-default">
+		<i class="glyphicon glyphicon-chevron-left"></i>
+		Back
+	</a>
+
+{% endblock %}

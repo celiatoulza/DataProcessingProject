@@ -1,0 +1,29 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+	Suppresion - {{ parent() }}
+{% endblock %}
+
+
+{% block platform_body %}
+
+	<h2>Delete an advert</h2>
+
+	<p>Are you sure you want to delete the add "{{ advert.title }}" ?</p>
+
+	<form action="{{ path('data_processing_project_delete', { 'id' : advert.id }) }}" method="post">
+		<p>
+			<a href="{{ path('data_processing_project_view', {'id' :advert.id}) }}" class="btn btn-default">
+				<i class="glyphicon glyphicon-chevron-left"></i>
+				Back to the Add
+			</a>
+		
+			<input type="Submit" value="Delete">
+		</p>
+
+
+		{{ form_rest(form) }}
+	</form>
+
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+  Edition - {{ parent() }}
+{% endblock %}
+
+{% block platform_body %}
+
+  <h2>Edit an advert</h2>
+
+  {{ include("DataProcessingProjectBundle:Advert:form.html.twig") }}
+
+
+  <p>
+    <a href="{{ path('data_processing_project_view', {'id': advert.id}) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Back to the Add
+    </a>
+  </p>
+
+{% endblock %}

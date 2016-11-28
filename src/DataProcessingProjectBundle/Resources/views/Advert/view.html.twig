@@ -1,0 +1,113 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+  Display of an Advert - {{ parent() }}
+{% endblock %}
+
+{% block platform_body %}
+  
+  <div class="header">
+    
+    {% if advert.image is not null %}
+      <img 
+        src="{{ asset( advert.image.getWebPath  ) }}"
+        alt="{{ advert.image.alt }}" 
+        height="100" 
+        width="200" 
+        style=' margin-left : 300px ' >
+    {% endif %}
+
+    <h2 style='float : left'>{{ advert.title }}</h2>
+  </div>
+
+  <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y H:i:s') }} -- last update : {{ advert.updatedAt|date('d/m/Y') }} </i>
+
+
+  <div class="well">
+    {{ advert.content }}
+  </div>
+
+  {% if listApplications|length >0 %}
+    <div class="well2">
+    <h3 style= 'display :inline-block'> Applications </h3> <i style= 'display :inline-block'> -- currently {{ advert.nbApplications }} applications </i>
+
+  {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path( 'data_processing_project_all_applications', { 'id' : advert.id } ) }}" class="btn btn-default">
+    <i class="glyphicon glyphicon"></i>
+    See all appliations
+    </a>
+  {% endif %}
+
+    <p>Last 3 applications : </p>
+      <table style="text-align:center">
+        <tr>
+          <th width="150px" style="text-align:center ">First Name</th>
+          <th width="150px" style="text-align:center ">Last Name</th>
+          <th width="150px" style="text-align:center ">Date</th>
+        </tr>
+        {% for value in listApplications %}
+          <tr>
+            <td>{{ value.firstName }}</td>
+            <td>{{ value.lastName }}</td>
+            <td>{{ value.applicationDate|date("d/m/Y") }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% endif %}
+
+
+
+  {% if not advert.categories.empty %}
+    <h3> Categories </h3>
+    <p>
+      This advert has been published in the following categories : 
+      {% for category in advert.categories %}
+      {{ category.name }} {% if not loop.last %}, {% endif %}
+      {% endfor %}
+    </p>
+  {% endif %}
+  
+
+  {% if listAdvertActivities|length >0 %}
+    <div>
+    <h3> Activities </h3>
+    This advert offers the following activities and even more 
+      <ul>
+        {% for advertActivity in listAdvertActivities %}
+          <li>{{ advertActivity.activity.name }} au prix de {{ advertActivity.price }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <br/>
+
+  <p>
+    <a href="{{ path( 'data_processing_project_home' ) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Back
+    </a>
+
+  {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path( 'data_processing_project_edit', { 'id': advert.id } ) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-edit"></i>
+      Edit
+    </a>
+    <a href="{{ path( 'data_processing_project_delete', { 'id': advert.id } ) }}" class="btn btn-danger">
+      <i class="glyphicon glyphicon-trash"></i>
+      Delete
+    </a>
+  {% endif %}
+
+    <a href="{{ path( 'data_processing_project_apply', { 'id' : advert.id } ) }}" class="btn btn-success">
+      <i class="glyphicon glyphicon-thumbs-up"></i>
+        Apply
+    </a>
+
+    <a href="{{ path( 'data_processing_project_index_activities', { 'advertId' : advert.id } ) }}" class="btn btn-info">
+        Activities
+    </a>
+  </p>
+
+{% endblock %}

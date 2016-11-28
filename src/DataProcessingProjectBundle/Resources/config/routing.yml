@@ -1,0 +1,105 @@
+data_processing_project_home: 
+    path:     /{page}
+    defaults: 
+        _controller: DataProcessingProjectBundle:Advert:index
+        page: 1
+    requirements : 
+        page : \d+
+
+data_processing_project_view: 
+    path:     /advert/{id}
+    defaults:
+        _controller: DataProcessingProjectBundle:Advert:view
+        id: 0
+    requirements:
+        id:  \d+
+
+data_processing_project_add:
+    path:     /add
+    defaults: { _controller: DataProcessingProjectBundle:Advert:add }
+
+data_processing_project_edit:
+    path:     /edit/{id}
+    defaults: { _controller: DataProcessingProjectBundle:Advert:edit }
+    requirements : 
+        id:   \d+
+
+data_processing_project_delete: 
+    path:     /delete/{id}
+    defaults: { _controller: DataProcessingProjectBundle:Advert:delete }
+    requirements: 
+        id:   \d+
+
+data_processing_project_search: 
+    path:     /search/
+    defaults: 
+        _controller: DataProcessingProjectBundle:Advert:search
+
+data_processing_project_apply:
+    path:   /apply/{id}
+    defaults:
+        _controller: DataProcessingProjectBundle:Application:apply
+        
+data_processing_project_all_applications:
+    path:   /all_applications/{id}
+    defaults:
+        _controller: DataProcessingProjectBundle:Application:allApplications
+
+data_processing_project_view_application:
+    path:   /application/{id}
+    defaults:
+        _controller: DataProcessingProjectBundle:Application:viewApplication
+    requirements: 
+        id:   \d+
+
+data_processing_project_delete_application:
+    path:   /delete_application/{id}
+    defaults:
+        _controller: DataProcessingProjectBundle:Application:deleteApplication
+    requirements: 
+        id:   \d+
+
+data_processing_project_index_activities:
+    path: /index_activities/{advertId}
+    defaults:
+        _controller: DataProcessingProjectBundle:Activity:index
+    requirements:
+        advertId: \d+
+
+data_processing_project_add_activity:
+    path: /add_activity/{advertId}
+    defaults: 
+        _controller: DataProcessingProjectBundle:Activity:addActivity
+    requirements:
+        advertId: \d+
+
+data_processing_project_view_activity:
+    path: /activity/{id}/{advertId}
+    defaults: 
+        _controller: DataProcessingProjectBundle:Activity:viewActivity
+    requirements:
+        advertId: \d+
+        id: \d+
+
+data_processing_project_add_preexisting_activity:
+    path: /add_preexisting_activity/{advertId}
+    defaults: 
+        _controller: DataProcessingProjectBundle:Activity:addPreexistingActivity
+    requirements:
+        advertId: \d+
+
+data_processing_project_edit_activity:
+    path: /edit_activity/{id}/{advertId}
+    defaults: 
+        _controller: DataProcessingProjectBundle:Activity:editActivity
+    requirements:
+        advertId: \d+
+        id: \d+
+
+data_processing_project_delete_activity:
+    path: /delete_activity/{id}/{advertId}
+    defaults: 
+        _controller: DataProcessingProjectBundle:Activity:deleteActivity
+    requirements:
+        advertId: \d+
+        id: \d+

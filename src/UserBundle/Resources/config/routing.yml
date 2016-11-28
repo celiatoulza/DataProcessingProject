@@ -1,0 +1,5 @@
+registration:
+    path: /registration
+    defaults:
+        _controller: UserBundle:Security:registration
+        

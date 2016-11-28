@@ -1,0 +1,79 @@
+{% extends "DataProcessingProjectBundle::layoutActivity.html.twig" %}
+
+{% block title %}
+  Add an Existing Activity- {{ parent() }}
+{% endblock %}
+
+{% block platform_body %}
+
+  <h2>Add an existing activity</h2>
+
+<h3>Form</h3>
+
+<div class="well">
+  {{ form_start( form, { 'attr': { 'class': 'form-horizontal' } } ) }}
+
+    {# Les erreurs générales du formulaire. #}
+    {{ form_errors( form ) }}
+
+    
+  {% if form.activity is defined %}
+    {# champ activity. #}
+      <div class="form-group">
+        {{ form_label( form.activity, "Name", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+        {{ form_errors( form.activity ) }}
+        <div class="col-sm-4">
+          {{ form_widget( form.activity, { 'attr': { 'class': 'form-control' }}) }}
+        </div>
+      </div>
+  {% endif %}
+
+
+
+
+  <br/>
+
+  {% if form.price is defined %}
+    {# champ price. #}
+      <div class="form-group">
+        {{ form_label( form.price, "Price", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+        {{ form_errors( form.price ) }}
+        <div class="col-sm-4">
+          {{ form_widget( form.price, { 'attr': { 'class': 'form-control' }}) }}
+        </div>
+      </div>
+  {% endif %}
+
+  <br/>
+
+  {% if form.location is defined %}
+  {# champ location. #}
+    <div class="form-group">
+      {{ form_label( form.location, "Location", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+      {{ form_errors( form.location ) }}
+      <div class="col-sm-4">
+        {{ form_widget( form.location, { 'attr': { 'class': 'form-control' }}) }}
+      </div>
+    </div>
+  {% endif %}
+
+	<p>
+	  {% if form.save is defined %}
+	    {{ form_widget( form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+	  {% endif %}
+
+		<a href="{{ path( 'data_processing_project_index_activities', { 'advertId': advert } ) }}" class="btn btn-default">
+		  Back
+		</a>
+    </p>
+
+
+    {{ form_rest(form) }}
+  
+
+  {{ form_end(form) }}
+
+   
+</div>
+
+{% endblock %}

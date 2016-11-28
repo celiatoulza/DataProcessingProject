@@ -1,0 +1,74 @@
+{% extends "DataProcessingProjectBundle::layoutActivity.html.twig" %}
+
+{% block title %}
+  Display of an Activity - {{ parent() }}
+{% endblock %}
+
+
+
+{% block platform_body %}
+
+  <h1> Advert : {{ advertActivity[0].advert.title }} </h1>
+  <hr>
+  
+  <div class="header">
+    
+    {% if advertActivity[0].activity.image is not null %}
+      <img 
+        src="{{ asset( advertActivity[0].activity.image.getWebPath  ) }}"
+        alt="{{ advertActivity[0].activity.image.alt }}"
+        height="100" 
+        width="200" 
+        style=' margin-left : 300px ' >
+    {% endif %}
+
+    <h2 style='float : left'>Activity : {{ advertActivity[0].activity.name }}</h2>
+    <br/>
+    <i> For only {{ advertActivity[0].price }} € by person </i>
+  </div>
+
+  <div class="well">
+    {{ advertActivity[0].activity.description }}
+  </div>
+  <i> Where to find us ? {{ advertActivity[0].location }} </i>
+
+  <br/>
+  <br/>
+
+  <p> Cette activité apparait aussi dans les annonces : </p>
+  {% for ad in listAdverts %}
+    {% if advertActivity[0].advert.title != ad['title'] %}
+      <li> {{ ad['title'] }} </li>
+    {% endif %}
+  {% endfor %}
+
+  <p>
+    <a href="{{ path( 'data_processing_project_index_activities', { 'id' : advertActivity[0].activity.id, 'advertId' : advertActivity[0].advert.id } ) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Back
+    </a>
+
+      <a href="{{ path( 'data_processing_project_edit_activity', { 'id' : advertActivity[0].activity.id, 'advertId' : advertActivity[0].advert.id } )}}" class ="btn btn-default">
+          Edit Activity
+      </a>
+
+      <a href="{{ path( 'data_processing_project_delete_activity', { 'id' : advertActivity[0].activity.id, 'advertId' : advertActivity[0].advert.id } )}}" class ="btn btn-default">
+          Delete Activity
+      </a>
+
+  {# 
+    {% if is_granted('ROLE_ADMIN') %}
+      <a href="{{ path( 'data_processing_project_edit', { 'id': advert.id } ) }}" class="btn btn-default">
+        <i class="glyphicon glyphicon-edit"></i>
+        Edit
+      </a>
+      <a href="{{ path( 'data_processing_project_delete', { 'id': advert.id } ) }}" class="btn btn-danger">
+        <i class="glyphicon glyphicon-trash"></i>
+        Delete
+      </a>
+    {% endif %}
+  #}
+
+  </p>
+
+{% endblock %}

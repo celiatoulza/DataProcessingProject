@@ -1,0 +1,120 @@
+<h3>Form</h3>
+
+<div class="well">
+  {{ form_start( form, { 'attr': { 'class': 'form-horizontal' } } ) }}
+
+    {# Les erreurs générales du formulaire. #}
+    {{ form_errors( form ) }}
+
+    <div class="form-group">
+      {# Génération du label. #}
+      {{ form_label( form.title, "Title", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+
+      {# Affichage des erreurs pour ce champ précis. #}
+      {{ form_errors(form.title) }}
+
+      <div class="col-sm-4">
+        {# Génération de l'input. #}
+        {{ form_widget( form.title, {'attr': {'class': 'form-control'}}) }}
+      </div>
+    </div>
+
+  {% if form.content is defined %}
+    {# Idem pour le champ content. #}
+    <div class="form-group">
+      {{ form_label( form.content, "Content", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+      {{ form_errors( form.content ) }}
+      <div class="col-sm-4">
+        {{ form_widget( form.content, { 'attr': { 'class': 'form-control' }}) }}
+      </div>
+    </div>
+  {% endif %}
+
+
+  {% if form.author is defined %}
+    {# champ author. #}
+    <div class="form-group">
+      {{ form_label( form.author, "Author", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+      {{ form_errors( form.author ) }}
+      <div class="col-sm-4">
+        {{ form_widget( form.author, { 'attr': { 'class': 'form-control' }}) }}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if form.image is defined %}
+    {# champ image. #}
+      <div class="form-group">
+        {{ form_label( form.image, "Image", { 'label_attr': { 'class': 'col-sm-3 control-label'  }}) }}
+        {{ form_errors( form.image ) }}
+        <div class="col-sm-4">
+          {{ form_widget( form.image ) }}
+        </div>
+      </div>
+  {% endif %}
+
+  <br/>
+
+  {% if form.date is defined %}
+    {# champ date. #}
+      <div class="form-group">
+        {{ form_label( form.date, "Date", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+        {{ form_errors( form.date ) }}
+        <div class="col-sm-4">
+          {{ form_widget( form.date, { 'attr': { 'class': '<!--test-->' }}) }}
+        </div>
+      </div>
+  {% endif %}
+
+  <br/>
+
+  {% if form.categories is defined %}
+  {# champ category. #}
+    <div class="form-group">
+      {{ form_label( form.categories, "Category", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+      {{ form_errors( form.categories ) }}
+      <div class="col-sm-4">
+        {{ form_widget( form.categories, { 'attr': { 'class': 'form-control' }}) }}
+      </div>
+    </div>
+  {% endif %}
+
+
+  {% if form.published is defined %}
+  {# champ published. #}
+    <div class="form-group">
+      {{ form_label( form.published, "Published?", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+      {{ form_errors( form.published ) }}
+      <div class="col-sm-2">
+        {{ form_widget( form.published, { 'attr': { 'class': 'form-control' }}) }}
+      </div>
+    </div>
+  {% endif %}
+
+  <p>
+
+    {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+    {% if form.save is defined %}
+      {{ form_widget( form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+    {% endif %}
+
+    {# 
+    <a href="{{ path( 'data_processing_project_index_activities', { 'advertId': advert.id } ) }}" class="btn btn-default">
+      Activities
+    </a>
+    #}
+
+  </p>
+
+  {# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+  {{ form_rest(form) }}
+
+
+  
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  {{ form_end(form) }}
+
+
+</div>

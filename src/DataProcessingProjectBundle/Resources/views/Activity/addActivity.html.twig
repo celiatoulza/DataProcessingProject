@@ -1,0 +1,94 @@
+{% extends "DataProcessingProjectBundle::layoutActivity.html.twig" %}
+
+{% block title %}
+  Add an Activity- {{ parent() }}
+{% endblock %}
+
+{% block platform_body %}
+
+  <h2>Add an activity</h2>
+
+<h3>Form</h3>
+
+<div class="well">
+  {{ form_start( form, { 'attr': { 'class': 'form-horizontal' } } ) }}
+
+    {# Les erreurs générales du formulaire. #}
+    {{ form_errors( form ) }}
+
+  {% if form.activity.name is defined %}
+    <div class="form-group">
+      {{ form_label( form.activity.name, "Name", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_errors(form.activity.name) }}
+      <div class="col-sm-4">
+        {{ form_widget( form.activity.name, {'attr': {'class': 'form-control'}}) }}
+      </div>
+    </div>
+    {% endif %}
+
+  {% if form.activity.description is defined %}
+    <div class="form-group">
+      {{ form_label( form.activity.description, "Description", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+      {{ form_errors( form.activity.description ) }}
+      <div class="col-sm-4">
+        {{ form_widget( form.activity.description, { 'attr': { 'class': 'form-control' }}) }}
+      </div>
+    </div>
+  {% endif %}
+
+
+  {% if form.activity.image is defined %}
+    {# champ image. #}
+      <div class="form-group">
+        {{ form_label( form.activity.image, "Image", { 'label_attr': { 'class': 'col-sm-3 control-label'  }}) }}
+        {{ form_errors( form.activity.image ) }}
+        <div class="col-sm-4">
+          {{ form_widget( form.activity.image ) }}
+        </div>
+      </div>
+  {% endif %}
+
+  <br/>
+
+  {% if form.price is defined %}
+    {# champ price. #}
+      <div class="form-group">
+        {{ form_label( form.price, "Price", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+        {{ form_errors( form.price ) }}
+        <div class="col-sm-4">
+          {{ form_widget( form.price, { 'attr': { 'class': 'form-control' }}) }}
+        </div>
+      </div>
+  {% endif %}
+
+  <br/>
+
+  {% if form.location is defined %}
+  {# champ location. #}
+    <div class="form-group">
+      {{ form_label( form.location, "Location", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+      {{ form_errors( form.location ) }}
+      <div class="col-sm-4">
+        {{ form_widget( form.location, { 'attr': { 'class': 'form-control' }}) }}
+      </div>
+    </div>
+  {% endif %}
+
+	<p>
+	  {% if form.save is defined %}
+	    {{ form_widget( form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+	  {% endif %}
+
+		<a href="{{ path( 'data_processing_project_index_activities', { 'advertId': advert } ) }}" class="btn btn-default">
+		  Back
+		</a>
+    </p>
+
+  {{ form_rest(form) }}
+
+  {{ form_end(form) }}
+
+   
+</div>
+
+{% endblock %}

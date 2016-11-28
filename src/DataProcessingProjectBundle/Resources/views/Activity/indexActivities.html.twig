@@ -1,0 +1,43 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+	Activities - {{ parent() }}
+{% endblock %}
+
+
+{% block platform_body %}
+
+	<h2>List of Activities for the advert {{ advert.title }}</h2>
+
+	<ul>
+		{% if listAdvertActivities is defined %}
+			{% for a in listAdvertActivities %}
+			<li>
+				{% if a.activity.image is not null %}
+					<img src=" {{ asset( a.activity.image.getWebPath  ) }}" style= "width:50px; height=50px " >
+				{% endif %}
+
+					<a href="{{ path( 'data_processing_project_view_activity', { 'advertId' : a.advert.id, 'id' : a.activity.id } ) }}"> {{ a.activity.name }}
+					</a>
+
+					
+					au prix de {{ a.price  }} €
+					à {{ a.location }}
+			</li>
+			{% endfor %}
+		{% else %}
+			<li> No activities yet </li>
+		{% endif %}
+		
+	</ul>
+
+	<a href="{{ path( 'data_processing_project_add_activity', { 'advertId' : advert.id } )}}" class ="btn btn-default">
+	Add New Activity
+	</a>
+
+	<a href="{{ path( 'data_processing_project_add_preexisting_activity', { 'advertId' : advert.id } )}}" class ="btn btn-default">
+	Add Preexisting Activity
+	</a>
+
+		
+{% endblock %}

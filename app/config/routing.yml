@@ -1,0 +1,13 @@
+login:
+    path:     /login
+    defaults: { _controller: UserBundle:Security:login }
+
+logout:
+    path : /logout
+
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+
+data_processing_project:
+    resource: "@DataProcessingProjectBundle/Resources/config/routing.yml"
+    prefix:   /platform
