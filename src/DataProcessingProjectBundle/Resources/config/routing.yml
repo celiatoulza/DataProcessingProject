@@ -103,3 +103,8 @@ data_processing_project_delete_activity:
     requirements:
         advertId: \d+
         id: \d+
+
+data_processing_project_search_activity: 
+    path: /search_activity
+    defaults: 
+        _controller: DataProcessingProjectBundle:Activity:searchActivity

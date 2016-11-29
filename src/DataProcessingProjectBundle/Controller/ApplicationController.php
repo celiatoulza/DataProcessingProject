@@ -45,7 +45,7 @@ class ApplicationController extends Controller {
 		// !!! --- JE FAIS LA VERIF CONCERNANT LES CHOIX --- !!! //
 
 		 // on vérifie que le choix entré dans le formulaire courant n'a pas déjà été utilisé par cet utilisateur
-		 if( isset( $application->getChoiceNumber() ) ){
+		 if( $application->getChoiceNumber() !== null ){
 
 		 	// on récupère toutes les autres applications de l'utilisateur en cours
 		 	$choisesApplicationsUser = $this->getDoctrine()

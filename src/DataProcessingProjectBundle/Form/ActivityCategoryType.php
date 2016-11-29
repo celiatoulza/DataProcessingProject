@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 use DataProcessingProjectBundle\Form\ImageType;
 
-class ActivityType extends AbstractType
+class ActivityCategoryType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -26,13 +26,7 @@ class ActivityType extends AbstractType
     {
         $builder
             ->add( 'name', TextType::class )
-            ->add( 'description', TextareaType::class )
-            ->add( 'image', ImageType::class )
-            ->add( 'categories', EntityType::class, array(
-                'class' => 'DataProcessingProjectBundle:ActivityCategory',
-                'choice_label' => 'name',
-                'multiple' => true,
-                ))
+            ->add( 'save', SubmitType::class, array("label" => "Search") )
             //->add( 'save', SubmitType::class )
             ;
     }
@@ -43,7 +37,7 @@ class ActivityType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'DataProcessingProjectBundle\Entity\Activity'
+            'data_class' => 'DataProcessingProjectBundle\Entity\ActivityCategory'
         ));
     }
 
@@ -52,7 +46,7 @@ class ActivityType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'dataprocessingprojectbundle_activity';
+        return 'dataprocessingprojectbundle_activity_category';
     }
 
 

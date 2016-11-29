@@ -1,0 +1,28 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+  Display of the Search by Category - {{ parent() }}
+{% endblock %}
+
+{% block platform_title %}
+	<h1> Activity </h1>
+{% endblock %}
+
+{% block platform_body %}
+
+	<h2> Category : {{ category }} </h2>
+
+	{% if activities is not null %}
+		<p> This category contains the following adverts : </p>
+		{% for activity in activities %}
+			{{ activity.name }}
+			<br/>
+			{{ activity.description }}
+			<br/>
+		{% endfor %}
+	{% else %}
+		<i>There is no adverts in this category</i>
+	{% endif %}
+
+
+{% endblock %}

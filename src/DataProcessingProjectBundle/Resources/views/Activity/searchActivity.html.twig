@@ -1,0 +1,43 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+  Search of an Activity - {{ parent() }}
+{% endblock %}
+
+{% block platform_title %}
+	<h1> Activity </h1>
+{% endblock %}
+
+{% block platform_body %}
+
+	<h3>Search Activities by Category</h3>
+	<h4>Please select an category</h4>
+
+	<div class="well">
+
+		{{ form_start( form, { 'attr': { 'class': 'form-horizontal' } } ) }}
+
+	    {{ form_errors( form ) }}
+
+	    {% if form.categories is defined %}
+		    <div class="form-group">
+		    	{{ form_label( form.categories, "Category", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+		    	{{ form_errors( form.categories )}}
+		    	<div class="col-sm-4">
+		    		{{ form_widget( form.categories, {'attr':{'class': 'form-control'}}) }}
+		    	</div>
+		    </div>
+	    {% endif %}
+
+	  {% if form.save is defined %}
+	    {{ form_widget( form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+	  {% endif %}
+
+	    {{ form_rest(form) }}
+	    {{ form_end(form) }}
+
+	</div>
+    
+
+
+{% endblock %}

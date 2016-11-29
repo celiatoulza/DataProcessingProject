@@ -9,12 +9,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 use DataProcessingProjectBundle\Entity\Activity;
 use DataProcessingProjectBundle\Entity\AdvertActivity;
+use DataProcessingProjectBundle\Entity\ActivityCategory;
 
 use DataProcessingProjectBundle\Form\ActivityType;
 use DataProcessingProjectBundle\Form\AdvertActivityType;
 use DataProcessingProjectBundle\Form\AdvertPreexistingActivityType;
+use DataProcessingProjectBundle\Form\ActivityCategoryType;
 
 use DataProcessingProjectBundle\Repository\AdvertActivityRepository;
+
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
 
@@ -282,6 +288,68 @@ class ActivityController extends Controller {
 
 		return $this->render( 'DataProcessingProjectBundle:Activity:deleteActivity.html.twig', array( 'advertActivity' => $advertActivity[0], 'form' => $form->createView() ));
 		
+	}
+
+
+	//**********************************************************
+	// Cette fonction permet de rechercher une activité par une categorie
+
+	public function searchActivityAction( Request $request ){
+
+		//$category = new ActivityCategory();
+		//$form = $this->createForm( ActivityCategoryType::class, $activity );
+		
+		$form = $this->createFormBuilder()
+					->add( 'categories', EntityType::class, array(
+                				'class' => 'DataProcessingProjectBundle:ActivityCategory',
+                				'choice_label' => 'name',
+                				'multiple' => true,
+                		))
+					->add( 'save', SubmitType::class, array( 'label' => 'Search' ))
+					->getForm()
+					;
+
+		// on récupère l'activityCategory d'abord (pour l'instant, on a que potentiellement le nom)
+		//$category = $em->getRepository( "DataProcessingProjectBundle:ActivityCategory" )->findByName( $data['category'] );
+
+
+		$form->handleRequest( $request );
+
+		if( $form->isSubmitted() && $form->isValid() ){
+
+			// on récupère les données entrées dans le formulaire sous forme de tableau 
+			$data = $form->getData();
+			//$test = $data['categories'][0];
+			//echo $test.getName();
+
+
+			$categoryNameSelected = $data['categories'][0]->getName() ;
+
+			$em = $this->getDoctrine()->getManager();
+			$category = $em->getRepository( "DataProcessingProjectBundle:ActivityCategory" )->findByName( $categoryNameSelected );
+
+			//var_dump( $category );
+
+			// WOUAH 3h de perdu pour ça 
+			$activities = $em->getRepository( "DataProcessingProjectBundle:Activity" )->findAllActivitiesForACategory( $category[0]->getId() );
+
+			//var_dump( $activities );
+
+			// ensuite on récupère toutes les activités qui font partie de cette catégorie.
+			//$activities = $em->getRepository( "DataProcessingProjectBundle:Activity" )->findBy( array( 'categories' => 3 ) );
+
+			//findAllActivitiesForThisCategory( $category[0]->getId(0) );
+			//findBy( array( 'categories' => $category[0]->getId() ) );
+
+
+			return $this->render( 'DataProcessingProjectBundle:Activity:displaySearchActivityByCategory.html.twig', array(
+					"category" => $categoryNameSelected,
+					"activities" => $activities ));
+
+		}
+
+		return $this->render( 'DataProcessingProjectBundle:Activity:searchActivity.html.twig', array(
+				"form" => $form->createView() ) );
 	}
 	
 }

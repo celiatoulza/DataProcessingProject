@@ -30,6 +30,17 @@
     </div>
     {% endif %}
 
+  {% if form.activity.categories is defined %}
+  {# champ category. #}
+    <div class="form-group">
+      {{ form_label( form.activity.categories, "Category", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+      {{ form_errors( form.activity.categories ) }}
+      <div class="col-sm-4">
+        {{ form_widget( form.activity.categories, { 'attr': { 'class': 'form-control' }}) }}
+      </div>
+    </div>
+  {% endif %}
+
   {% if form.activity.description is defined %}
     <div class="form-group">
       {{ form_label( form.activity.description, "General Description", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}

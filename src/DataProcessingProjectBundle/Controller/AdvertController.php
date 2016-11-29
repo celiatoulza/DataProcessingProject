@@ -67,6 +67,12 @@ class AdvertController extends Controller {
 		// on récupère l'annonce avec l'id en paramètre avec la méthode de récupération de base fournie par Doctrine
 		$advert = $em->getRepository( 'DataProcessingProjectBundle:Advert' )->find( $id );
 
+
+		/*foreach( $advert->getCategories() as $test ){
+			echo $test->getName();
+			// ça marche aussi ça : $advert->getCategories()[0]
+		}*/
+
 		// on vérifie que l'annonce existe
 		if ( $advert === null ){
 			throw new NotFoundHttpException("The advert that you are looking for does not exist.");
@@ -223,7 +229,7 @@ class AdvertController extends Controller {
 
 	public function searchAction( Request $request ){
 		
-		// on crée le formulaire de recherche nous même avec seulement 2 attributs 
+		// on crée le formulaire de recherche nous même avec seulement 2 attributs, celui ci est basé sur aucune classe 
 		// le nom pour la recherche par nom et le boutton search qui va nous faire revenir sur cette fonction 
 		$form = $this->createFormBuilder( )
 						->add( 'title', TextType::class )

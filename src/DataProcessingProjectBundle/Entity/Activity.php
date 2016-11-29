@@ -41,9 +41,14 @@ class Activity
      */
     private $image;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="DataProcessingProjectBundle\Entity\ActivityCategory", cascade={"persist"})
+     * @ORM\JoinColumn(name="categories", referencedColumnName="id", nullable=true)
+     */
+    private $categories;
 
 
-
+    
 
     /**
      * Get id
@@ -125,5 +130,46 @@ class Activity
     public function getImage()
     {
         return $this->image;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add category
+     *
+     * @param \DataProcessingProjectBundle\Entity\ActivityCategory $category
+     *
+     * @return Activity
+     */
+    public function addCategory(\DataProcessingProjectBundle\Entity\ActivityCategory $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \DataProcessingProjectBundle\Entity\ActivityCategory $category
+     */
+    public function removeCategory(\DataProcessingProjectBundle\Entity\ActivityCategory $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

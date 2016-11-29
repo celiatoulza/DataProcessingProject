@@ -10,4 +10,15 @@ namespace DataProcessingProjectBundle\Repository;
  */
 class ActivityRepository extends \Doctrine\ORM\EntityRepository
 {
+
+	public function findAllActivitiesForACategory( $category ){
+		 $qb = $this->createQueryBuilder('a')
+					->leftJoin('a.categories', 'cat')
+    				->addSelect('cat')
+    				;
+
+    	return $qb->getQuery()->getResult()
+
+  ;
+	}
 }
