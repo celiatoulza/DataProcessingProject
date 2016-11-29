@@ -29,7 +29,15 @@
   {% endif %}
 
 
-
+  {% if form.moreDescription is defined %}
+    <div class="form-group">
+      {{ form_label( form.moreDescription, "Precise Description", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+      {{ form_errors( form.moreDescription ) }}
+      <div class="col-sm-4">
+        {{ form_widget( form.moreDescription, { 'attr': { 'class': 'form-control' }}) }}
+      </div>
+    </div>
+  {% endif %}
 
   <br/>
 

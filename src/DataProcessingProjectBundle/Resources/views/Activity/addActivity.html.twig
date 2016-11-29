@@ -32,12 +32,22 @@
 
   {% if form.activity.description is defined %}
     <div class="form-group">
-      {{ form_label( form.activity.description, "Description", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+      {{ form_label( form.activity.description, "General Description", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
       {{ form_errors( form.activity.description ) }}
       <div class="col-sm-4">
         {{ form_widget( form.activity.description, { 'attr': { 'class': 'form-control' }}) }}
       </div>
     </div>
+  {% endif %}
+
+  {% if form.moreDescription is defined %}
+	  <div class="form-group">
+	    {{ form_label( form.moreDescription, "Precise Description", { 'label_attr': { 'class': 'col-sm-3 control-label' }}) }}
+	    {{ form_errors( form.moreDescription ) }}
+	    <div class="col-sm-4">
+	      {{ form_widget( form.moreDescription, { 'attr': { 'class': 'form-control' }}) }}
+	    </div>
+	  </div>
   {% endif %}
 
 

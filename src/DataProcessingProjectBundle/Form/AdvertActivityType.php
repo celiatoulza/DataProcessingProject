@@ -29,6 +29,7 @@ class AdvertActivityType extends AbstractType
         $builder
             ->add( 'price', MoneyType::class )
             ->add( 'location', TextType::class )
+            ->add( 'moreDescription', TextType::class )
             ->add( 'activity', ActivityType::class )
             ->add( 'save', SubmitType::class )
             ;

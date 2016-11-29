@@ -36,6 +36,13 @@ class AdvertActivity
     private $location;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="more_description", type="text", nullable=true)
+     */
+    private $moreDescription;
+
+    /**
      * @ORM\ManyToOne(targetEntity="DataProcessingProjectBundle\Entity\Advert")
      * @ORM\JoinColumn(nullable=false, onDelete="cascade")
      */
@@ -85,28 +92,6 @@ class AdvertActivity
         return $this->price;
     }
 
-    public function getActivity(){
-
-        return $this->activity;
-    }
-
-    public function setActivity( $activity ){
-
-        $this->activity = $activity;
-        return $this;
-    }
-
-    public function getAdvert(){
-        
-        return $this->advert;
-    }
-
-    public function setAdvert( $advert ){
-
-        $this->advert = $advert;
-        return $this;
-    }
-
     /**
      * Set location
      *
@@ -130,4 +115,53 @@ class AdvertActivity
     {
         return $this->location;
     }
+
+    /**
+     * Set moreDescritpion
+     *
+     * @param string $moreDescritpion
+     *
+     * @return AdvertActivity
+     */
+    public function setMoreDescription($moreDescription)
+    {
+        $this->moreDescription = $moreDescription;
+
+        return $this;
+    }
+
+    /**
+     * Get moreDescritpion
+     *
+     * @return string
+     */
+    public function getMoreDescription()
+    {
+        return $this->moreDescription;
+    }
+
+
+    public function getActivity(){
+
+        return $this->activity;
+    }
+
+    public function setActivity( $activity ){
+
+        $this->activity = $activity;
+        return $this;
+    }
+
+    public function getAdvert(){
+        
+        return $this->advert;
+    }
+
+    public function setAdvert( $advert ){
+
+        $this->advert = $advert;
+        return $this;
+    }
+
+    
 }

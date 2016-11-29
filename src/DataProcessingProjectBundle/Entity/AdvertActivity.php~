@@ -24,7 +24,7 @@ class AdvertActivity
     /**
      * @var float
      *
-     * @ORM\Column(name="price", type="float")
+     * @ORM\Column(name="price", type="float", nullable=true)
      */
     private $price;
 
@@ -34,6 +34,13 @@ class AdvertActivity
      * @ORM\Column(name="location", type="text", nullable=true)
      */
     private $location;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="more_description", type="text", nullable=true)
+     */
+    private $moreDescritpion;
 
     /**
      * @ORM\ManyToOne(targetEntity="DataProcessingProjectBundle\Entity\Advert")
@@ -106,5 +113,28 @@ class AdvertActivity
         $this->advert = $advert;
         return $this;
     }
-}
 
+    /**
+     * Set location
+     *
+     * @param string $location
+     *
+     * @return AdvertActivity
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+
+        return $this;
+    }
+
+    /**
+     * Get location
+     *
+     * @return string
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+}

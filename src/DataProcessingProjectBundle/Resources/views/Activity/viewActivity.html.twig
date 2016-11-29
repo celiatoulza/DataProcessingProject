@@ -29,6 +29,8 @@
 
   <div class="well">
     {{ advertActivity[0].activity.description }}
+    <br/>
+    {{ advertActivity[0].moreDescription }}
   </div>
   <i> Where to find us ? {{ advertActivity[0].location }} </i>
 
@@ -49,11 +51,13 @@
     </a>
 
       <a href="{{ path( 'data_processing_project_edit_activity', { 'id' : advertActivity[0].activity.id, 'advertId' : advertActivity[0].advert.id } )}}" class ="btn btn-default">
-          Edit Activity
+       <i class="glyphicon glyphicon-edit"></i>
+          Edit
       </a>
 
-      <a href="{{ path( 'data_processing_project_delete_activity', { 'id' : advertActivity[0].activity.id, 'advertId' : advertActivity[0].advert.id } )}}" class ="btn btn-default">
-          Delete Activity
+      <a href="{{ path( 'data_processing_project_delete_activity', { 'id' : advertActivity[0].activity.id, 'advertId' : advertActivity[0].advert.id } )}}" class ="btn btn-danger">
+       <i class="glyphicon glyphicon-trash"></i>
+          Delete
       </a>
 
   {# 
