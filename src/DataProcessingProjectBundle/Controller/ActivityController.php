@@ -91,10 +91,17 @@ class ActivityController extends Controller {
 			// on met l'advert dans advertActivity
 			$advertActivity->setAdvert( $advert );
 
-			// on persiste l'activity parce qu'elle existe pas encore
+			// on persiste l'advertactivity parce qu'elle existe pas encore
 			$em->persist( $advertActivity );
 
 			// on met à jour la base de données
+			$em->flush();
+
+			// on met ensuite à jour le prix moyen de l'activité donc après avoir à jour la base de données avec notre nouvelle activité et donc nouvelle advertactivité également
+			$price= $em->getRepository( 'DataProcessingProjectBundle:AdvertActivity' )->findAveragePrice( $advertActivity->getActivity()->getId() )[0][1];
+
+			$advertActivity->getActivity()->setAveragePrice( intval($price) );
+
 			$em->flush();
 
 			return $this->redirectToRoute( 'data_processing_project_index_activities', array( 'advertId' => $advertId ));
@@ -333,6 +340,17 @@ class ActivityController extends Controller {
 			// WOUAH 3h de perdu pour ça 
 			$activities = $em->getRepository( "DataProcessingProjectBundle:Activity" )->findAllActivitiesForACategory( $category[0]->getId() );
 
+			foreach( $activities as $activity ){
+				$advertsActivity[ $activity->getId() ] = $em->getRepository( 'DataProcessingProjectBundle:AdvertActivity' )->findAdvertsByActivity( $activity->getId() );
+				var_dump( $advertsActivity[ $activity->getId() ]);
+			}
+
+
+			// je fais un appel à la base de données pour chaque activité  pour trouver le prix moyen de celle-ci trouvée du coup très très mauvais
+			/*foreach( $activities as $activity ){
+				$priceActivity[ $activity->getId() ] = $em->getRepository( 'DataProcessingProjectBundle:AdvertActivity' )->findAveragePrice( $activity->getId() )[0][1];
+			}*/
+
 			//var_dump( $activities );
 
 			// ensuite on récupère toutes les activités qui font partie de cette catégorie.
@@ -344,7 +362,10 @@ class ActivityController extends Controller {
 
 			return $this->render( 'DataProcessingProjectBundle:Activity:displaySearchActivityByCategory.html.twig', array(
 					"category" => $categoryNameSelected,
-					"activities" => $activities ));
+					"activities" => $activities, 
+					"advertsActivity" =>$advertsActivity,
+					//"priceActivity" => $priceActivity
+					 ));
 
 		}
 

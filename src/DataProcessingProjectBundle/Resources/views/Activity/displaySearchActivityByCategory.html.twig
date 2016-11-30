@@ -11,13 +11,21 @@
 {% block platform_body %}
 
 	<h2> Category : {{ category }} </h2>
+	<br/>
 
 	{% if activities is not null %}
-		<p> This category contains the following adverts : </p>
+		<h4> This category contains the following activities : </h4>
 		{% for activity in activities %}
-			{{ activity.name }}
-			<br/>
-			{{ activity.description }}
+			<h4><b>{{ activity.name }}</h4></b>
+			<div class="well">
+				{{ activity.description }}
+			</div>
+				<p>This activity cost in average {{ activity.averageprice }}€</p>
+				<p>Where to do that ?
+					{% for ad in advertsActivity[ activity.id ] %}
+						{{ ad['title'] }}{% if not loop.last %}, {% endif %}
+					{% endfor %}
+				</p>
 			<br/>
 		{% endfor %}
 	{% else %}

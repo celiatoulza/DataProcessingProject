@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="advert_activity")
  * @ORM\Entity(repositoryClass="DataProcessingProjectBundle\Repository\AdvertActivityRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class AdvertActivity
 {

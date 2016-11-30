@@ -47,6 +47,13 @@ class Activity
      */
     private $categories;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="average_price", type="float", nullable=true)
+     */
+    private $averagePrice;
+
 
     
 
@@ -171,5 +178,29 @@ class Activity
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Set averagePrice
+     *
+     * @param integer $averagePrice
+     *
+     * @return Activity
+     */
+    public function setAveragePrice($averagePrice)
+    {
+        $this->averagePrice = $averagePrice;
+
+        return $this;
+    }
+
+    /**
+     * Get averagePrice
+     *
+     * @return float
+     */
+    public function getAveragePrice()
+    {
+        return $this->averagePrice;
     }
 }

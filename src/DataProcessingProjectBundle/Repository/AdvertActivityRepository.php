@@ -16,9 +16,25 @@ class AdvertActivityRepository extends \Doctrine\ORM\EntityRepository
 
 	public function findAllAdvertForThisActivity( $activity ){
 
-
-
 		$query = $this->_em->createQuery( "SELECT annonce.title FROM DataProcessingProjectBundle:Advert annonce, DataProcessingProjectBundle:AdvertActivity aa, DataProcessingProjectBundle:Activity activite WHERE aa.advert = annonce.id AND aa.activity = activite.id AND activite.name= :activity" );
+		$query->setParameter( 'activity', $activity );
+		$results = $query->getResult();
+
+		return $results;
+	}
+
+	public function findAveragePrice( $activity ){
+
+		$query = $this->_em->createQuery( "SELECT avg(aa.price) FROM DataProcessingProjectBundle:AdvertActivity aa WHERE aa.activity = :activity");
+		$query->setParameter( 'activity', $activity );
+		$results = $query->getResult();
+
+		return $results;
+	}
+
+	public function findAdvertsByActivity( $activity ){
+
+		$query = $this->_em->createQuery( "SELECT advert.title FROM DataProcessingProjectBundle:Advert advert, DataProcessingProjectBundle:AdvertActivity aa WHERE advert.id = aa.advert AND aa.activity = :activity");
 		$query->setParameter( 'activity', $activity );
 		$results = $query->getResult();
 

@@ -47,6 +47,13 @@ class Activity
      */
     private $categories;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="average_price", type="integer", nullable=true)
+     */
+    private $averagePrice;
+
 
     
 

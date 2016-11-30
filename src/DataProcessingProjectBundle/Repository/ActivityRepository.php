@@ -13,8 +13,10 @@ class ActivityRepository extends \Doctrine\ORM\EntityRepository
 
 	public function findAllActivitiesForACategory( $category ){
 		 $qb = $this->createQueryBuilder('a')
-					->leftJoin('a.categories', 'cat')
+					->join('a.categories', 'cat')
     				->addSelect('cat')
+    				->where( 'cat = :category' )
+    				->setParameter( 'category', $category )
     				;
 
     	return $qb->getQuery()->getResult()
