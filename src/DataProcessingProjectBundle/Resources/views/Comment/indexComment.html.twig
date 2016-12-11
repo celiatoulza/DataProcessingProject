@@ -11,6 +11,10 @@
 {% block platform_body %}
   
     {% if comments|length >0 %}
+      <h4>This is the list of the comment for the advert <b>{{ advert.title }}</b></h4>
+      {% for comment in comments %}
+        <p> - "{{ comment.content }}" written by {{comment.author.username}} </p>
+      {% endfor %}
 
     {% else %}
       <p>There is no comment yet on this advert</p>
@@ -19,13 +23,17 @@
 
   </br>
   <p>
-    <a href="{{ path( 'data_processing_project_home' ) }}" class="btn btn-default">
+    <a href="{{ path( 'data_processing_project_view', { 'id' : advert.id } ) }}" class="btn btn-default">
       <i class="glyphicon glyphicon-chevron-left"></i>
       Back
     </a>
 
-    <a href="{{ path( 'data_processing_project_add_comment', { 'advertId' : advert } ) }}" class="btn btn-info">
+    <a href="{{ path( 'data_processing_project_add_comment', { 'advertId' : advert.id } ) }}" class="btn btn-info">
         Add
+    </a>
+
+    <a href="{{ path( 'data_processing_project_delete_comment', { 'advertId' : advert.id } ) }}" class="btn btn-danger">
+        Delete one of your Comment
     </a>
   </p>
 

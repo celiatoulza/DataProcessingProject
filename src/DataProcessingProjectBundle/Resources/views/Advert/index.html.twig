@@ -15,7 +15,7 @@
 		{% for advert in listAdverts %}
 		<li>
 			{% if advert.image is not null %}
-				<img src=" {{ asset( advert.image.getWebPath  ) }}" style= "width:50px; height=50px " >
+				<img src=" {{ asset( advert.image.getWebPath  ) }}" style= "width:100px; height=100px " >
 			{% endif %}
 			<a href="{{ path( 'data_processing_project_view', { 'id' : advert.id } ) }}"> {{ advert.title }}
 			</a>

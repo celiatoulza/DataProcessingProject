@@ -1,0 +1,41 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+	Search by Name - {{ parent() }}
+{% endblock %}
+
+{% block platform_body %}
+
+<h2>Add a Category</h2>
+
+<p> Please enter the name of the category you want to add </p>
+
+<h3>Form</h3>
+
+<div class="well">
+  {{ form_start( form, { 'attr': { 'class': 'form-horizontal' } } ) }}
+    {{ form_errors( form ) }}
+
+    <div class="form-group">
+      {{ form_label( form.name, "Name", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+      {{ form_errors(form.name) }}
+      <div class="col-sm-4">
+        {{ form_widget( form.name, {'attr': {'class': 'form-control'}}) }}
+      </div>
+    </div>
+
+
+    <a href="{{ path( 'data_processing_project_category', { 'advertId' : advert.id  } ) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Back
+    </a>
+  {% if form.save is defined %}
+    {{ form_widget( form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+  {% endif %}
+
+  {{ form_rest(form) }}
+  
+  {{ form_end(form) }}
+</div>
+
+{% endblock %}

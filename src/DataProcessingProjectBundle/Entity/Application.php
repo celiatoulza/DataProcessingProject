@@ -96,7 +96,7 @@ class Application
 
     public function __construct( $username ){
         $this->applicationDate = new \Datetime();
-        $this->username = $username;;
+        $this->username = $username;
     }
 
 

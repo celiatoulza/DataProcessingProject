@@ -42,15 +42,21 @@ class Comment
     private $author;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="DataProcessingProjectBundle\Entity\Advert")
+     * @ORM\JoinColumn(name="advert", nullable=false, onDelete="cascade")
+     */
+    private $advert;
+
     /////////////////
     // CONSTRUCTOR //
     /////////////////
 
 
-    public function __construct( $author ){
-        echo "constructeur";
+    public function __construct( $author, $advert ){
         $this->date = new \Datetime();
         $this->author = $author;
+        $this->advert = $advert;
     }
 
 
@@ -139,5 +145,29 @@ class Comment
     public function getAuthor()
     {
         return $this->author;
+    }
+
+    /**
+     * Set advert
+     *
+     * @param \DataProcessingProjectBundle\Entity\Advert $advert
+     *
+     * @return Comment
+     */
+    public function setAdvert(\DataProcessingProjectBundle\Entity\Advert $advert)
+    {
+        $this->advert = $advert;
+
+        return $this;
+    }
+
+    /**
+     * Get advert
+     *
+     * @return \DataProcessingProjectBundle\Entity\Advert
+     */
+    public function getAdvert()
+    {
+        return $this->advert;
     }
 }

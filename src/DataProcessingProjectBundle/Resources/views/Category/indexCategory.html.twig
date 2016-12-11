@@ -1,0 +1,31 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+  Display of an Advert - {{ parent() }}
+{% endblock %}
+
+{% block platform_title %}
+  <h1> Advert </h1>
+{% endblock %}
+
+{% block platform_body %}
+  
+    <p> The advert <b>{{advert.title}}</b> appears in the following categories :
+
+      {% for category in advert.categories %}
+        {{ category.name }} {% if not loop.last %}, {% endif %}
+      {% endfor %}
+    </p>
+  </br>
+
+  <p>
+    <a href="{{ path( 'data_processing_project_view', { 'id' : advert.id } ) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Back
+    </a>
+    <a href="{{ path( 'data_processing_project_add_category', { 'advertId' : advert.id } ) }}" class="btn btn-success">
+      Add
+    </a>
+  </p>
+
+{% endblock %}

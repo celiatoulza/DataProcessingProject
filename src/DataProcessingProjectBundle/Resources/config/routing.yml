@@ -128,3 +128,18 @@ data_processing_project_add_comment:
     path: /add_comment/{advertId}
     defaults : 
         _controller : DataProcessingProjectBundle:Comment:addComment
+
+data_processing_project_delete_comment: 
+    path: /delete_comment/{advertId}
+    defaults:
+        _controller : DataProcessingProjectBundle:Comment:deleteComment
+
+data_processing_project_category:
+    path: /category/{advertId}
+    defaults:
+        _controller : DataProcessingProjectBundle:Category:indexCategory 
+
+data_processing_project_add_category:
+    path: /add_category/{advertId}
+    defaults:
+        _controller : DataProcessingProjectBundle:Category:addCategory 

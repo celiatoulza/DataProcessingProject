@@ -29,7 +29,7 @@ class AdvertType extends AbstractType
     {
         $builder
             ->add( 'title', TextType::class )
-            ->add( 'date', DateTimeType::class )
+            #->add( 'date', DateTimeType::class )
             ->add( 'author', TextType::class )
             ->add( 'content', TextareaType::class )
             ->add( 'image', ImageType::class )
@@ -41,7 +41,7 @@ class AdvertType extends AbstractType
                 ))
             ;
 
-        $builder->addEventListener(
+        /*$builder->addEventListener(
                 FormEvents::PRE_SET_DATA,
                 function( FormEvent $event ){
                     $advert = $event->getData();
@@ -55,7 +55,7 @@ class AdvertType extends AbstractType
                         $event->getForm()->remove( 'published' );
                     }
                 }
-        );
+        );*/
     }
     
     /**

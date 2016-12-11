@@ -26,13 +26,14 @@
 	    </div>
 	    
 	    <p>
-		    {% if form.save is defined %}
-		      {{ form_widget( form.save, {'attr': {'class': 'btn btn-primary'}}) }}
-		    {% endif %}
-		    <a href="{{ path( 'data_processing_project_view', { 'id' : advert.id } ) }}" class="btn btn-default">
+		    <a href="{{ path( 'data_processing_project_comments', { 'advertId' : advert.id } ) }}" class="btn btn-default">
 		      <i class="glyphicon glyphicon-chevron-left"></i>
 		      Back
 	   		</a>
+
+	   		{% if form.save is defined %}
+		      {{ form_widget( form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+		    {% endif %}
    		</p>
 
 	  {{ form_rest(form) }}

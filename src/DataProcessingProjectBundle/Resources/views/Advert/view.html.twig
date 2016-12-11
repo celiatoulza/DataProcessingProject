@@ -61,36 +61,51 @@
   {% endif %}
 
 
-
-  {% if not advert.categories.empty %}
-    <h3> Categories </h3>
-    <p>
-      This advert has been published in the following categories : 
-      {% for category in advert.categories %}
-      {{ category.name }} {% if not loop.last %}, {% endif %}
-      {% endfor %}
-    </p>
-  {% endif %}
+  <div>
+    <h3> Categories <a href="{{ path( 'data_processing_project_category', { 'advertId' : advert.id } ) }}" class="btn btn-info">
+          Categories
+      </a>  </h3>
+    {% if not advert.categories.empty %}
+      <p>
+        This advert has been published in the following categories : 
+        {% for category in advert.categories %}
+        {{ category.name }} {% if not loop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+    {% endif %}
+  </div>
   
 
-  {% if listAdvertActivities|length >0 %}
+  
     <div>
-    <h3> Activities  <a href="{{ path( 'data_processing_project_index_activities', { 'advertId' : advert.id } ) }}" class="btn btn-info">
-        Activities
-    </a> </h3>
-    This advert offers the following activities and even more 
-      <ul>
-        {% for advertActivity in listAdvertActivities %}
-          <li>{{ advertActivity.activity.name }} au prix de {{ advertActivity.price }} </li>
-        {% endfor %}
-      </ul>
+      <h3> Activities  <a href="{{ path( 'data_processing_project_index_activities', { 'advertId' : advert.id } ) }}" class="btn btn-info">
+          Activities
+      </a> </h3>
+      {% if listAdvertActivities|length >0 %}
+        This advert offers the following activities and even more 
+          <ul>
+            {% for advertActivity in listAdvertActivities %}
+              <li>{{ advertActivity.activity.name }} which costs {{ advertActivity.price }} €</li>
+            {% endfor %}
+          </ul>
+      {% endif %}
     </div>
-  {% endif %}
 
 
-    <h3> Comments <a href="{{ path( 'data_processing_project_comments', { 'advertId' : advert.id } ) }}" class="btn btn-info">
-        Comments
-    </a> </h3>
+  
+    <div>
+      <h3> Comments <a href="{{ path( 'data_processing_project_comments', { 'advertId' : advert.id } ) }}" class="btn btn-info">
+          Comments
+      </a> </h3>
+      {% if listComments|length >0 %}
+        You can see the last 3 comments about this add : 
+        <ul>
+          {% for comment in listComments %}
+            <li> "{{ comment.content }}" <i>by {{ comment.author.username }}</i> </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
   
   </br>
   <p>

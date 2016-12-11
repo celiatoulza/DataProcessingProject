@@ -95,10 +95,20 @@ class AdvertController extends Controller {
 		// on récupère le nombre d'applications
 		$nbApplications = $advert->getNbApplications();
 
+
+		$listComments = $em->getRepository( 'DataProcessingProjectBundle:Comment' )
+						   ->findBy( 
+						   			array( 'advert' => $advert ), 
+						   			array( 'date' => 'desc' ),
+						   			3,
+						   			0
+						   		);
+
 		// On affiche la vue correspondante avec les paramètres récupérées. 
 		return $this->render( 'DataProcessingProjectBundle:Advert:view.html.twig', array( 'advert' =>$advert, 
 					 'listApplications' => $listApplications, 
-					 'listAdvertActivities' => $listAdvertActivities, 
+					 'listAdvertActivities' => $listAdvertActivities,
+					 'listComments' => $listComments,
 					 'nbApplications' => $nbApplications ));
 	}
 
@@ -125,7 +135,7 @@ class AdvertController extends Controller {
 		// et on pérennise l'annonce dans la base de données.	
 		if ( $form->isValid() ){
 
-			echo $advert->getCategories();
+			//echo $advert->getCategories();
 
 			$em=$this->getDoctrine()->getManager();
 			$em->persist( $advert );
