@@ -75,18 +75,24 @@
 
   {% if listAdvertActivities|length >0 %}
     <div>
-    <h3> Activities </h3>
+    <h3> Activities  <a href="{{ path( 'data_processing_project_index_activities', { 'advertId' : advert.id } ) }}" class="btn btn-info">
+        Activities
+    </a> </h3>
     This advert offers the following activities and even more 
       <ul>
         {% for advertActivity in listAdvertActivities %}
-          <li>{{ advertActivity.activity.name }} au prix de {{ advertActivity.price }}</li>
+          <li>{{ advertActivity.activity.name }} au prix de {{ advertActivity.price }} </li>
         {% endfor %}
       </ul>
     </div>
   {% endif %}
 
-  <br/>
 
+    <h3> Comments <a href="{{ path( 'data_processing_project_comments', { 'advertId' : advert.id } ) }}" class="btn btn-info">
+        Comments
+    </a> </h3>
+  
+  </br>
   <p>
     <a href="{{ path( 'data_processing_project_home' ) }}" class="btn btn-default">
       <i class="glyphicon glyphicon-chevron-left"></i>
@@ -107,10 +113,6 @@
     <a href="{{ path( 'data_processing_project_apply', { 'id' : advert.id } ) }}" class="btn btn-success">
       <i class="glyphicon glyphicon-thumbs-up"></i>
         Apply
-    </a>
-
-    <a href="{{ path( 'data_processing_project_index_activities', { 'advertId' : advert.id } ) }}" class="btn btn-info">
-        Activities
     </a>
   </p>
 

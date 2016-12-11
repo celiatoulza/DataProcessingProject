@@ -1,0 +1,50 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+  Comment - {{ parent() }}
+{% endblock %}
+
+{% block platform_title %}
+	<h1> Comment </h1>
+{% endblock %}
+
+{% block platform_body %}
+
+	
+	<h3>Comment form for the advert {{ advert.title }} </h3>
+	<div class="well">
+	  {{ form_start( form, { 'attr': { 'class': 'form-horizontal' } } ) }}
+
+	    {{ form_errors( form ) }}
+
+	    <div class="form-group">
+	      {{ form_label( form.content, "Content", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+	      {{ form_errors(form.content) }}
+	      <div class="col-sm-4">
+	        {{ form_widget( form.content, {'attr': {'class': 'form-control'}}) }}
+	      </div>
+	    </div>
+	    
+	    <p>
+		    {% if form.save is defined %}
+		      {{ form_widget( form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+		    {% endif %}
+		    <a href="{{ path( 'data_processing_project_view', { 'id' : advert.id } ) }}" class="btn btn-default">
+		      <i class="glyphicon glyphicon-chevron-left"></i>
+		      Back
+	   		</a>
+   		</p>
+
+	  {{ form_rest(form) }}
+	  
+	  {{ form_end(form) }}
+
+	</div>
+
+
+
+
+
+
+
+{% endblock %}

@@ -95,7 +95,6 @@ class AdvertController extends Controller {
 		// on récupère le nombre d'applications
 		$nbApplications = $advert->getNbApplications();
 
-		echo "fin du vue";
 		// On affiche la vue correspondante avec les paramètres récupérées. 
 		return $this->render( 'DataProcessingProjectBundle:Advert:view.html.twig', array( 'advert' =>$advert, 
 					 'listApplications' => $listApplications, 

@@ -1,0 +1,32 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+  Display of the Comments - {{ parent() }}
+{% endblock %}
+
+{% block platform_title %}
+  <h1> Comments </h1>
+{% endblock %}
+
+{% block platform_body %}
+  
+    {% if comments|length >0 %}
+
+    {% else %}
+      <p>There is no comment yet on this advert</p>
+    {% endif %}
+
+
+  </br>
+  <p>
+    <a href="{{ path( 'data_processing_project_home' ) }}" class="btn btn-default">
+      <i class="glyphicon glyphicon-chevron-left"></i>
+      Back
+    </a>
+
+    <a href="{{ path( 'data_processing_project_add_comment', { 'advertId' : advert } ) }}" class="btn btn-info">
+        Add
+    </a>
+  </p>
+
+{% endblock %}

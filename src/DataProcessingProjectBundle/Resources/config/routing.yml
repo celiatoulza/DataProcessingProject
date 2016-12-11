@@ -118,3 +118,13 @@ data_processing_project_edit_informations:
     path: /edit_my_informations
     defaults : 
         _controller: DataProcessingProjectBundle:Account:editInformations
+
+data_processing_project_comments: 
+    path: /comments/{advertId}
+    defaults : 
+        _controller : DataProcessingProjectBundle:Comment:viewComments
+
+data_processing_project_add_comment: 
+    path: /add_comment/{advertId}
+    defaults : 
+        _controller : DataProcessingProjectBundle:Comment:addComment
