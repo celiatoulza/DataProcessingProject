@@ -52,16 +52,20 @@ class ApplicationController extends Controller {
 		 		->getManager()
 		 		->getRepository( 'DataProcessingProjectBundle:Application' )
 		 		->findAllChoicesAlreadyChooseByThisUser( $this->getUser() );
+
+		 	$currentChoice = $application->getChoiceNumber();
 		 	
 		 	// si le current choice fait déjà partie des choix utilisé de l'utilisateur, on le fait retourner au formulaire de candidature pour qu'ils choisissent un autre choix
-		 	if ( in_array( $currentChoice, $choisesApplicationsUser[0] ) ){
-		 		echo "deja utilisé ce choix";
+		 	if ( !(empty($choisesApplicationsUser))){
+			 	if ( in_array( $currentChoice, $choisesApplicationsUser[0] ) ){
+			 		echo "deja utilisé ce choix";
 
-		 		return $this->render( 'DataProcessingProjectBundle:Application:apply.html.twig', array(
-					'form' => $form->createView(), 
-					'advert' => $advert, 
-					'errorChoice' => "You have already choose this choice number for your applicaions." ));
-		 	}
+			 		return $this->render( 'DataProcessingProjectBundle:Application:apply.html.twig', array(
+						'form' => $form->createView(), 
+						'advert' => $advert, 
+						'errorChoice' => "You have already choose this choice number for your applicaions." ));
+			 	}
+			 }
 
 		 } 
 

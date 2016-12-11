@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 
+
 class SecurityController extends Controller
 {
 	public function loginAction( Request $request )
@@ -83,13 +84,27 @@ class SecurityController extends Controller
 			$em->persist( $user );
 
 			// on met à jour la base de données
-			$em->flush();	
+			$em->flush();
+
+
+			// on envoie un mail de confirmation à l'utilisateur pour lui dire qu'il s'est bien enregistré
+			/*$message = \Swift_Message::newInstance()
+						->setSubject('Test')
+						->setFrom('example@example.com')
+						->setTo('celia.toulza@gmail.com')
+						->setBody( 'yep' )
+						;
+			$this->get('mailer')->send( $message );*/
+
+
 
 			// on redirige l'utilisateur pour qu'ils se log in
 			return $this->RedirectToRoute( 'login', array(
 					'registration' => true,
 			) );
 		}	
+
+			
 		
 		// on renvoie le formulaire pour que l'utilisateur complète les champs qu'on va pouvoir réucpérer ensuite
 		return $this->render( 'UserBundle:Security:registration.html.twig', array(

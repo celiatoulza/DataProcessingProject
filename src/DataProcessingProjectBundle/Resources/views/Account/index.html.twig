@@ -1,0 +1,45 @@
+{% extends "DataProcessingProjectBundle::layout.html.twig" %}
+
+{% block title %}
+	Accueil - {{ parent() }}
+{% endblock %}
+
+
+{% block platform_body %}
+
+	<h2>All Your Applications</h2>
+
+	<ul>
+		{% if applications|length >0 %}
+			{% for application in applications %}
+				<li>
+					<h4><i>Choice N°{{ application.choiceNumber}}</i></h4>
+					You apply for the advert named <b>{{ adverts[application.id]|upper }}</b>.
+					</br>
+					You will arrive on the {{ application.arrivalDate|date('d/m/Y') }} and will leave on the {{ application.departureDate|date('d/m/Y') }}.
+					</br>
+					Your renting is for {{ application.nbPeople }} people.
+					</br>
+					You applied on the {{ application.applicationDate|date('d/m/Y') }}.
+					</br>
+					</br>
+				</li>
+
+			
+			{% endfor %}
+		{% else %}
+			You did not apply for any advert yet !
+		{% endif %}
+	</ul>
+
+		<p>
+			<a href="{{ path( 'data_processing_project_home', { 'page': 1 } ) }}" class="btn btn-default">
+			      <i class="glyphicon glyphicon-home"></i>
+			      Home
+			</a>
+			<a href="{{ path( 'data_processing_project_edit_informations' ) }}" class="btn btn-warning">
+			      Edit Your Informations
+			</a>		
+		</p>
+
+{% endblock %}

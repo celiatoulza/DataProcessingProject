@@ -108,3 +108,13 @@ data_processing_project_search_activity:
     path: /search_activity
     defaults: 
         _controller: DataProcessingProjectBundle:Activity:searchActivity
+
+data_processing_project_bundle_account:
+    path: /my_account
+    defaults: 
+        _controller: DataProcessingProjectBundle:Account:index
+
+data_processing_project_edit_informations: 
+    path: /edit_my_informations
+    defaults : 
+        _controller: DataProcessingProjectBundle:Account:editInformations
