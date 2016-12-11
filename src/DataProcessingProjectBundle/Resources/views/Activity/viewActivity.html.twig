@@ -49,28 +49,35 @@
   {% endif %}
   <br/>
 
-  <p> Cette activité apparait aussi dans les annonces : </p>
-  {% for ad in listAdverts %}
-    {% if advertActivity[0].advert.title != ad['title'] %}
-      <li> {{ ad['title'] }} </li>
-    {% endif %}
-  {% endfor %}
+  <p> Cette activité apparait aussi dans les annonces :
+      {% for ad in listAdverts %}
+        {% if advertActivity[0].advert.title != ad['title'] %}
+          <i> {{ ad['title'] }} </i>
+        {% endif %}
+        {% if not loop.last %}, {% endif %}
+      {% endfor %}
+  </p>
 
+  </br>
   <p>
     <a href="{{ path( 'data_processing_project_index_activities', { 'id' : advertActivity[0].activity.id, 'advertId' : advertActivity[0].advert.id } ) }}" class="btn btn-default">
       <i class="glyphicon glyphicon-chevron-left"></i>
       Back
     </a>
 
-      <a href="{{ path( 'data_processing_project_edit_activity', { 'id' : advertActivity[0].activity.id, 'advertId' : advertActivity[0].advert.id } )}}" class ="btn btn-default">
+    {% if is_granted('ROLE_ADMIN') %}
+      <a href="{{ path( 'data_processing_project_edit_activity', { 'id' : advertActivity[0].activity.id, 'advertId' : advertActivity[0].advert.id } )}}" class ="btn btn-warning">
        <i class="glyphicon glyphicon-edit"></i>
           Edit
       </a>
+    {% endif %}
 
+    {% if is_granted('ROLE_ADMIN') %}
       <a href="{{ path( 'data_processing_project_delete_activity', { 'id' : advertActivity[0].activity.id, 'advertId' : advertActivity[0].advert.id } )}}" class ="btn btn-danger">
        <i class="glyphicon glyphicon-trash"></i>
           Delete
       </a>
+    {% endif %}
 
   {# 
     {% if is_granted('ROLE_ADMIN') %}

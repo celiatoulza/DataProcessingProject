@@ -340,9 +340,12 @@ class ActivityController extends Controller {
 			// WOUAH 3h de perdu pour ça 
 			$activities = $em->getRepository( "DataProcessingProjectBundle:Activity" )->findAllActivitiesForACategory( $category[0]->getId() );
 
-			foreach( $activities as $activity ){
-				$advertsActivity[ $activity->getId() ] = $em->getRepository( 'DataProcessingProjectBundle:AdvertActivity' )->findAdvertsByActivity( $activity->getId() );
-				var_dump( $advertsActivity[ $activity->getId() ]);
+			$advertsActivity =[];
+			if( !(empty( $activities ))){
+				foreach( $activities as $activity ){
+					$advertsActivity[ $activity->getId() ] = $em->getRepository( 'DataProcessingProjectBundle:AdvertActivity' )->findAdvertsByActivity( $activity->getId() );
+					// var_dump( $advertsActivity[ $activity->getId() ]);
+				}
 			}
 
 

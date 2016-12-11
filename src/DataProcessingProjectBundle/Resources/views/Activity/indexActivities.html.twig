@@ -31,13 +31,15 @@
 		
 	</ul>
 
-	<a href="{{ path( 'data_processing_project_add_activity', { 'advertId' : advert.id } )}}" class ="btn btn-default">
-	Add New Activity
-	</a>
+	{% if is_granted('ROLE_ADMIN') %}
+		<a href="{{ path( 'data_processing_project_add_activity', { 'advertId' : advert.id } )}}" class ="btn btn-default">
+		Add New Activity
+		</a>
 
-	<a href="{{ path( 'data_processing_project_add_preexisting_activity', { 'advertId' : advert.id } )}}" class ="btn btn-default">
-	Add Preexisting Activity
-	</a>
+		<a href="{{ path( 'data_processing_project_add_preexisting_activity', { 'advertId' : advert.id } )}}" class ="btn btn-default">
+		Add Preexisting Activity
+		</a>
+	{% endif %}
 
 		
 {% endblock %}

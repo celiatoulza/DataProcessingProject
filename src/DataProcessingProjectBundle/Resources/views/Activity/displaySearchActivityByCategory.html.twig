@@ -13,7 +13,7 @@
 	<h2> Category : {{ category }} </h2>
 	<br/>
 
-	{% if activities is not null %}
+	{% if activities|length >0 %}
 		<h4> This category contains the following activities : </h4>
 		{% for activity in activities %}
 			<h4><b>{{ activity.name }}</h4></b>
